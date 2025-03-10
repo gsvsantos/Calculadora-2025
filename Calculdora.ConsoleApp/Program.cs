@@ -1,9 +1,14 @@
-﻿namespace Calculdora.ConsoleApp
+﻿using Microsoft.CSharp.RuntimeBinder;
+
+namespace Calculdora.ConsoleApp
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            int operationsQuantity = 0;
+            string[] history = new string[200];
+
             while (true)
             {
                 Console.Clear();
@@ -16,6 +21,7 @@
                 Console.WriteLine("[3] Multiplicação");
                 Console.WriteLine("[4] Divisão");
                 Console.WriteLine("[5] Tabuada");
+                Console.WriteLine("[6] Histórico de operações");
                 Console.WriteLine("[S] Sair");
 
                 Console.Write("\nEscolha uma opção: ");
@@ -25,7 +31,7 @@
                 if (option == "S")
                     break;
 
-                if (option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "X")
+                if (option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "6" && option != "X")
                 {
                     Console.Write("\nOpção inválida!\n\nPressione <Enter> e tente novamente.");
 
@@ -33,7 +39,7 @@
                     continue;
                 }
 
-                else if (option == "5")
+                if (option == "5")
                 {
                     Console.Clear();
                     Console.WriteLine("------------------");
@@ -51,6 +57,37 @@
                     {
                         int r = number * i;
                         Console.WriteLine($"{number} x {i} = {r}");
+                    }
+
+                    Console.WriteLine("\nPressione <Enter> para voltar ao menu!");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (option == "6")
+                {
+                    Console.Clear();
+                    Console.WriteLine("------------------------------------");
+                    Console.WriteLine("Histórico de perações realizadas");
+                    Console.WriteLine("------------------------------------\n");
+
+                    for (int i = 0; i < history.Length; i++)
+                    {
+                        if (history[0] == null)
+                        {
+                            Console.WriteLine("Não foi realizado nenhuma operação.");
+                            break;
+                        }
+                        if (history[i] != null)
+                        {
+                            Console.WriteLine(history[i]);
+                            continue;
+                        }
+                        else if (history[i] == null)
+                        {
+                            break;
+                        }
+
                     }
 
                     Console.WriteLine("\nPressione <Enter> para voltar ao menu!");
@@ -81,7 +118,7 @@
                 {
                     while (secondNumber == 0)
                     {
-                        Console.WriteLine($"Não é possível dividir {firstNumber} por zero!");
+                        Console.WriteLine($"\nNão é possível dividir {firstNumber} por zero!");
 
                         Console.Write("Digite o segundo número novamente: ");
                         secondNumber = Convert.ToDecimal(Console.ReadLine());
@@ -90,12 +127,28 @@
                     result = firstNumber / secondNumber;
                 }
 
-                Console.WriteLine("----------------------------------");
+                Console.WriteLine("\n----------------------------------");
                 Console.WriteLine("Resultado: " + result.ToString("F2"));
                 Console.WriteLine("----------------------------------\n");
 
                 Console.Write("Deseja continuar? (S/N): ");
                 string opcaoContinuar = Console.ReadLine().ToUpper();
+
+                string sinal = "";
+                switch (option)
+                {
+                    case "1": sinal = "+";
+                        break;
+                    case "2": sinal = "-";
+                        break;
+                    case "3": sinal = "*";
+                        break;
+                    case "4": sinal = "/";
+                        break;
+                }
+
+                history[operationsQuantity] = $"{firstNumber} {sinal} {secondNumber} = {Math.Round(result, 2)}";
+                operationsQuantity++;
 
                 while (opcaoContinuar != "S" && opcaoContinuar != "N")
                 {
