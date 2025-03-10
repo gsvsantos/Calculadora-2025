@@ -4,18 +4,19 @@
     {
         static void Main(string[] args)
         {
-            while (true) // enquanto condição for verdadeira
+            while (true)
             {
                 Console.Clear();
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("Calculadora Tabajara - 2025");
                 Console.WriteLine("----------------------------------\n");
 
-                Console.WriteLine("1 - Somar");
-                Console.WriteLine("2 - Subtrair");
-                Console.WriteLine("3 - Multiplicação");
-                Console.WriteLine("4 - Divisão");
-                Console.WriteLine("S - Sair");
+                Console.WriteLine("[1] Somar");
+                Console.WriteLine("[2] Subtrair");
+                Console.WriteLine("[3] Multiplicação");
+                Console.WriteLine("[4] Divisão");
+                Console.WriteLine("[5] Tabuada");
+                Console.WriteLine("[S] Sair");
 
                 Console.Write("\nEscolha uma opção: ");
 
@@ -23,6 +24,39 @@
 
                 if (option == "S")
                     break;
+
+                if (option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "X")
+                {
+                    Console.Write("\nOpção inválida!\n\nPressione <Enter> e tente novamente.");
+
+                    Console.ReadLine();
+                    continue;
+                }
+
+                else if (option == "5")
+                {
+                    Console.Clear();
+                    Console.WriteLine("------------------");
+                    Console.WriteLine("Tabuada até 10");
+                    Console.WriteLine("------------------\n");
+
+                    // usuário digita um número
+                    Console.Write("Digite um número para gerar a tabuada: ");
+                    int number = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"\nTabuada de {number} até 10:");
+
+                    // calcula a tabuada até o 10 desse numero // para
+
+                    for (int i = 1; i <= 10; i++)
+                    {
+                        int r = number * i;
+                        Console.WriteLine($"{number} x {i} = {r}");
+                    }
+
+                    Console.WriteLine("\nPressione <Enter> para voltar ao menu!");
+                    Console.ReadKey();
+                    continue;
+                }
 
                 Console.Write("Digite o primeiro número: ");
                 string firstNumberString = Console.ReadLine();
@@ -34,7 +68,6 @@
 
                 decimal result = 0;
 
-                // se / senao / senao se
                 if (option == "1")
                     result = firstNumber + secondNumber;
 
@@ -45,7 +78,17 @@
                     result = firstNumber * secondNumber;
 
                 else if (option == "4")
+                {
+                    while (secondNumber == 0)
+                    {
+                        Console.WriteLine($"Não é possível dividir {firstNumber} por zero!");
+
+                        Console.Write("Digite o segundo número novamente: ");
+                        secondNumber = Convert.ToDecimal(Console.ReadLine());
+                    }
+
                     result = firstNumber / secondNumber;
+                }
 
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("Resultado: " + result.ToString("F2"));
@@ -54,7 +97,13 @@
                 Console.Write("Deseja continuar? (S/N): ");
                 string opcaoContinuar = Console.ReadLine().ToUpper();
 
-                if (opcaoContinuar == "N")
+                while (opcaoContinuar != "S" && opcaoContinuar != "N")
+                {
+                    Console.Write("\nOpção inválida!\n\nPressione <Enter> e selecione novamente.");
+                    Console.Write("\nDeseja continuar? (S/N): ");
+                    opcaoContinuar = Console.ReadLine().ToUpper();
+                }
+                if (opcaoContinuar != "S")
                     break;
             }
         }
