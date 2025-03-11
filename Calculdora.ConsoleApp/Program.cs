@@ -1,6 +1,6 @@
 ﻿using Microsoft.CSharp.RuntimeBinder;
 
-namespace Calculdora.ConsoleApp
+namespace Calculadora.ConsoleApp
 {
     internal class Program
     {
