@@ -1,6 +1,6 @@
 # Calculadora Tabajara 2025
 
-![](https://i.imgur.com/LxTvPxH.gif)
+![](https://i.imgur.com/SRvRbek.gif)
 
 ## Introdução
 Uma simples calculadora de console capaz de realizar as quatro operações matemáticas.
