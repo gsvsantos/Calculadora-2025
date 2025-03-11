@@ -59,7 +59,7 @@ namespace Calculdora.ConsoleApp
                         Console.WriteLine($"{number} x {i} = {r}");
                     }
 
-                    Console.WriteLine("\nPressione <Enter> para voltar ao menu!");
+                    Console.Write("\nPressione <Enter> para voltar ao menu!");
                     Console.ReadKey();
                     continue;
                 }
@@ -90,7 +90,7 @@ namespace Calculdora.ConsoleApp
 
                     }
 
-                    Console.WriteLine("\nPressione <Enter> para voltar ao menu!");
+                    Console.Write("\nPressione <Enter> para voltar ao menu!");
                     Console.ReadKey();
                     continue;
                 }
