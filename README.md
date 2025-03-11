@@ -1,28 +1,28 @@
-# Calculdora Tabajara 2025
+# Calculadora Tabajara 2025
 
 ![](https://i.imgur.com/LxTvPxH.gif)
 
-## Introdução
-Uma simples calculadora de console capaz de realizar as quatro operações matemáticas.
+## IntroduÃ§Ã£o
+Uma simples calculadora de console capaz de realizar as quatro operaÃ§Ãµes matemÃ¡ticas.
 
 ## Funcionalidades
 
-- **Operações Básicas:** Realiza adição, subtração, multiplicação, divisão, e tabuada.
-- **Suporte a Decimais:** Capaz de trabalhar com números contendo até duas casas decimais.
-- **Validação de Entrada:** A calculadora garante que apenas opções validas sejam aceitas.
-- **Tratamento de Divisão por Zero:** A calculadora é capaz de validar erros de divisão por zero.
-- **Histórico de Operações:** A calculadora é capaz de gravar e mostrar um histórico de operações.
+- **OperaÃ§Ãµes BÃ¡sicas:** Realiza adiÃ§Ã£o, subtraÃ§Ã£o, multiplicaÃ§Ã£o, divisÃ£o, e tabuada.
+- **Suporte a Decimais:** Capaz de trabalhar com nÃºmeros contendo atÃ© duas casas decimais.
+- **ValidaÃ§Ã£o de Entrada:** A calculadora garante que apenas opÃ§Ãµes validas sejam aceitas.
+- **Tratamento de DivisÃ£o por Zero:** A calculadora Ã© capaz de validar erros de divisÃ£o por zero.
+- **HistÃ³rico de OperaÃ§Ãµes:** A calculadora Ã© capaz de gravar e mostrar um histÃ³rico de operaÃ§Ãµes.
 
 ## Como utilizar
 
-1. Clone o repositório ou baixe o código fonte da Calculadora.
-2. Abra o terminal ou o prompt de comando e navegue até a pasta raiz da Calculadora.
-3. Utilize o comando abaixo para restaurar as dependências do projeto.
+1. Clone o repositÃ³rio ou baixe o cÃ³digo fonte da Calculadora.
+2. Abra o terminal ou o prompt de comando e navegue atÃ© a pasta raiz da Calculadora.
+3. Utilize o comando abaixo para restaurar as dependÃªncias do projeto.
 
 ```
 dotnet restore
 ```
-4. Em seguida, compile a solução utilizando o comando:
+4. Em seguida, compile a soluÃ§Ã£o utilizando o comando:
 ```
 dotnet build --configuration Release
 ```
@@ -32,11 +32,11 @@ dotnet build --configuration Release
 dotnet run --project Calculadora.ConsoleApp
 ```
 
-6. Para executar o arquivo compilado, navegue até a pasta `./Calculadora.ConsoleApp/bin/Release/net8.0/` e execute o arquivo:
+6. Para executar o arquivo compilado, navegue atÃ© a pasta `./Calculadora.ConsoleApp/bin/Release/net8.0/` e execute o arquivo:
 ```
 Calculdora.ConsoleApp.exe
 ```
 
 ## Requisitos
 
-- .NET SDK (recomendado .NET 8.0 ou superior) para compilação e execução do projeto.
+- .NET SDK (recomendado .NET 8.0 ou superior) para compilaÃ§Ã£o e execuÃ§Ã£o do projeto.
