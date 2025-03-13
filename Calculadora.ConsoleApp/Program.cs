@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Calculadora.ConsoleApp
 {
     internal class Program
@@ -9,22 +11,7 @@ namespace Calculadora.ConsoleApp
 
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("----------------------------------");
-                Console.WriteLine("Calculadora Tabajara - 2025");
-                Console.WriteLine("----------------------------------\n");
-
-                Console.WriteLine("[1] Somar");
-                Console.WriteLine("[2] Subtrair");
-                Console.WriteLine("[3] Multiplicação");
-                Console.WriteLine("[4] Divisão");
-                Console.WriteLine("[5] Tabuada");
-                Console.WriteLine("[6] Histórico de Operações");
-                Console.WriteLine("[S] Sair");
-
-                Console.Write("\nEscolha uma opção: ");
-
-                string option = Console.ReadLine().ToUpper();
+                string option = ShowMenu();
 
                 if (option == "S")
                     break;
@@ -94,11 +81,11 @@ namespace Calculadora.ConsoleApp
                 }
 
                 Console.Write("Digite o primeiro número: ");
-                string firstNumberString = Console.ReadLine();
+                string firstNumberString = Console.ReadLine()!;
                 decimal firstNumber = Convert.ToDecimal(firstNumberString);
 
                 Console.Write("Digite o segundo número: ");
-                string secondNumberString = Console.ReadLine();
+                string secondNumberString = Console.ReadLine()!;
                 decimal secondNumber = Convert.ToDecimal(secondNumberString);
 
                 decimal result = 0;
@@ -144,17 +131,39 @@ namespace Calculadora.ConsoleApp
                 operationsQuantity++;
 
                 Console.Write("Deseja continuar? (S/N): ");
-                string opcaoContinuar = Console.ReadLine().ToUpper();
+                string opcaoContinuar = Console.ReadLine()!.ToUpper();
 
                 while (opcaoContinuar != "S" && opcaoContinuar != "N")
                 {
                     Console.Write("\nOpção inválida!\n\nPressione <Enter> e selecione novamente.");
                     Console.Write("\nDeseja continuar? (S/N): ");
-                    opcaoContinuar = Console.ReadLine().ToUpper();
+                    opcaoContinuar = Console.ReadLine()!.ToUpper();
                 }
                 if (opcaoContinuar != "S")
                     break;
             }
+        }
+
+        static string ShowMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Calculadora Tabajara - 2025");
+            Console.WriteLine("----------------------------------\n");
+
+            Console.WriteLine("[1] Somar");
+            Console.WriteLine("[2] Subtrair");
+            Console.WriteLine("[3] Multiplicação");
+            Console.WriteLine("[4] Divisão");
+            Console.WriteLine("[5] Tabuada");
+            Console.WriteLine("[6] Histórico de Operações");
+            Console.WriteLine("[S] Sair");
+
+            Console.Write("\nEscolha uma opção: ");
+
+            string option = Console.ReadLine()!.ToUpper();
+
+            return option;
         }
     }
 }
