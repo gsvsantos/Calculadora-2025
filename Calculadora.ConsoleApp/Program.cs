@@ -71,7 +71,7 @@ namespace Calculadora.ConsoleApp
         static void ShowErrorMessage()
         {
             Console.Write("\nOpção inválida!\n\nPressione <Enter> e tente novamente.");
-            Console.ReadLine();
+            Console.ReadKey();
         }
         static decimal DoCalculation(string option)
         {
