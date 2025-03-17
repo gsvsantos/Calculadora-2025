@@ -1,160 +1,183 @@
-namespace Calculadora.ConsoleApp
+namespace Calculadora.ConsoleApp;
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        bool isGoing = true;
+        do
         {
-            int operationsQuantity = 0;
-            string[] history = new string[200];
+            string option = ShowMenu();
 
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine("----------------------------------");
-                Console.WriteLine("Calculadora Tabajara - 2025");
-                Console.WriteLine("----------------------------------\n");
+            if (OptionIsExit(option) == true)
+                break;
 
-                Console.WriteLine("[1] Somar");
-                Console.WriteLine("[2] Subtrair");
-                Console.WriteLine("[3] Multiplicação");
-                Console.WriteLine("[4] Divisão");
-                Console.WriteLine("[5] Tabuada");
-                Console.WriteLine("[6] Histórico de Operações");
-                Console.WriteLine("[S] Sair");
+            else if (OptionIsMultiplicationTable(option))
+                MultiplicationTable();
 
-                Console.Write("\nEscolha uma opção: ");
+            else if (OptionIsHistory(option))
+                ShowHistory();
 
-                string option = Console.ReadLine().ToUpper();
+            else if (InvalidOption(option))
+                ShowErrorMessage();
 
-                if (option == "S")
-                    break;
+            else
+                ShowResult(DoCalculation(option), ref isGoing);
+        } while (isGoing);
+    }
+    static string ShowMenu()
+    {
+        Console.Clear();
+        Console.WriteLine("----------------------------------");
+        Console.WriteLine("Calculadora Tabajara - 2025");
+        Console.WriteLine("----------------------------------\n");
 
-                if (option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "6" && option != "X")
-                {
-                    Console.Write("\nOpção inválida!\n\nPressione <Enter> e tente novamente.");
+        Console.WriteLine("[1] Somar");
+        Console.WriteLine("[2] Subtrair");
+        Console.WriteLine("[3] Multiplicação");
+        Console.WriteLine("[4] Divisão");
+        Console.WriteLine("[5] Tabuada");
+        Console.WriteLine("[6] Histórico de Operações");
+        Console.WriteLine("[S] Sair");
 
-                    Console.ReadLine();
-                    continue;
-                }
+        Console.Write("\nEscolha uma opção: ");
 
-                if (option == "5")
-                {
-                    Console.Clear();
-                    Console.WriteLine("------------------");
-                    Console.WriteLine("Tabuada até 10");
-                    Console.WriteLine("------------------\n");
+        string option = Console.ReadLine()!.ToUpper();
 
-                    // usuário digita um número
-                    Console.Write("Digite um número para gerar a tabuada: ");
-                    int number = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine($"\nTabuada de {number} até 10:");
+        return option;
+    }
+    static bool OptionIsExit(string option)
+    {
+        bool isTrue = option == "S";
+        return isTrue;
+    }
+    static bool OptionIsMultiplicationTable(string option)
+    {
+        return option == "5";
+    }
+    static bool OptionIsHistory(string option)
+    {
+        return option == "6";
+    }
+    static bool InvalidOption(string option)
+    {
+        bool isInvalid = false;
+        if (option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "6" && option != "X")
+            isInvalid = true;
 
-                    // calcula a tabuada até o 10 desse numero // para
+        return isInvalid;
+    }
+    static void ShowErrorMessage()
+    {
+        Console.Write("\nOpção inválida!\n\nPressione <Enter> e tente novamente.");
+        Console.ReadKey();
+    }
+    static decimal DoCalculation(string option)
+    {
+        Console.Write("Digite o primeiro número: ");
+        string firstNumberString = Console.ReadLine()!;
+        decimal firstNumber = Convert.ToDecimal(firstNumberString);
 
-                    for (int i = 1; i <= 10; i++)
-                    {
-                        int r = number * i;
-                        Console.WriteLine($"{number} x {i} = {r}");
-                    }
+        Console.Write("Digite o segundo número: ");
+        string secondNumberString = Console.ReadLine()!;
+        decimal secondNumber = Convert.ToDecimal(secondNumberString);
+        decimal result = 0;
+        string signal = "";
 
-                    Console.Write("\nPressione <Enter> para voltar ao menu!");
-                    Console.ReadKey();
-                    continue;
-                }
-
-                if (option == "6")
-                {
-                    Console.Clear();
-                    Console.WriteLine("------------------------------------");
-                    Console.WriteLine("Histórico de perações realizadas");
-                    Console.WriteLine("------------------------------------\n");
-
-                    for (int i = 0; i < history.Length; i++)
-                    {
-                        if (history[0] == null)
-                        {
-                            Console.WriteLine("Não foi realizado nenhuma operação.");
-                            break;
-                        }
-                        if (history[i] != null)
-                        {
-                            Console.WriteLine(history[i]);
-                            continue;
-                        }
-                        else if (history[i] == null)
-                        {
-                            break;
-                        }
-
-                    }
-
-                    Console.Write("\nPressione <Enter> para voltar ao menu!");
-                    Console.ReadKey();
-                    continue;
-                }
-
-                Console.Write("Digite o primeiro número: ");
-                string firstNumberString = Console.ReadLine();
-                decimal firstNumber = Convert.ToDecimal(firstNumberString);
-
-                Console.Write("Digite o segundo número: ");
-                string secondNumberString = Console.ReadLine();
-                decimal secondNumber = Convert.ToDecimal(secondNumberString);
-
-                decimal result = 0;
-                string sinal = "";
-
-                if (option == "1")
-                {
-                    sinal = "+";
-                    result = firstNumber + secondNumber;
-                }
-
-                else if (option == "2")
-                {
-                    sinal = "-";
-                    result = firstNumber - secondNumber;
-                }
-
-                else if (option == "3")
-                {
-                    sinal = "*";
-                    result = firstNumber * secondNumber;
-                }
-
-                else if (option == "4")
-                {
-                    while (secondNumber == 0)
-                    {
-                        Console.WriteLine($"\nNão é possível dividir {firstNumber} por zero!");
-
-                        Console.Write("Digite o segundo número novamente: ");
-                        secondNumber = Convert.ToDecimal(Console.ReadLine());
-                    }
-
-                    sinal = "/";
-                    result = firstNumber / secondNumber;
-                }
-
-                Console.WriteLine("\n----------------------------------");
-                Console.WriteLine("Resultado: " + result.ToString("F2"));
-                Console.WriteLine("----------------------------------\n");
-
-                history[operationsQuantity] = $"{firstNumber} {sinal} {secondNumber} = {Math.Round(result, 2)}";
-                operationsQuantity++;
-
-                Console.Write("Deseja continuar? (S/N): ");
-                string opcaoContinuar = Console.ReadLine().ToUpper();
-
-                while (opcaoContinuar != "S" && opcaoContinuar != "N")
-                {
-                    Console.Write("\nOpção inválida!\n\nPressione <Enter> e selecione novamente.");
-                    Console.Write("\nDeseja continuar? (S/N): ");
-                    opcaoContinuar = Console.ReadLine().ToUpper();
-                }
-                if (opcaoContinuar != "S")
-                    break;
-            }
+        if (option == "1")
+        {
+            signal = "+";
+            result = Calculadora.Addition(firstNumber, secondNumber);
         }
+
+        else if (option == "2")
+        {
+            signal = "-";
+            result = Calculadora.Subtraction(firstNumber, secondNumber);
+        }
+
+        else if (option == "3")
+        {
+            signal = "*";
+            result = Calculadora.Multiplication(firstNumber, secondNumber);
+        }
+
+        else if (option == "4")
+        {
+            while (secondNumber == 0)
+            {
+                Console.WriteLine($"\nNão é possível dividir {firstNumber} por zero!");
+
+                Console.Write("Digite o segundo número novamente: ");
+                secondNumber = Convert.ToDecimal(Console.ReadLine());
+            }
+            signal = "/";
+            result = Calculadora.Division(firstNumber, secondNumber);
+        }
+
+        Calculadora.GetHistory(firstNumber, secondNumber, signal, result);
+        Calculadora.OperationsQuantity++;
+        return result;
+    }
+    static void ShowResult(decimal result, ref bool isGoing)
+    {
+        Console.WriteLine("\n----------------------------------");
+        Console.WriteLine("Resultado: " + result.ToString("F2"));
+        Console.WriteLine("----------------------------------\n");
+
+        Console.Write("Deseja voltar ao menu? (S/N): ");
+        string opcaoContinuar = Console.ReadLine()!.ToUpper();
+
+        while (opcaoContinuar != "S" && opcaoContinuar != "N")
+        {
+            Console.Write("\nOpção inválida!\n\nPressione <Enter> e selecione novamente.");
+            Console.Write("\nDeseja continuar? (S/N): ");
+            opcaoContinuar = Console.ReadLine()!.ToUpper();
+        }
+        if (opcaoContinuar == "N")
+            isGoing = false;
+    }
+    static void MultiplicationTable()
+    {
+        Console.Clear();
+        Console.WriteLine("------------------");
+        Console.WriteLine("Tabuada até 10");
+        Console.WriteLine("------------------\n");
+        Console.Write("Digite um número para gerar a tabuada: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine($"\nTabuada de {number} até 10:");
+        Calculadora.MultiplicationTable(number);
+
+        Console.Write("\nPressione <Enter> para voltar ao menu!");
+        Console.ReadKey();
+    }
+    static void ShowHistory()
+    {
+        Console.Clear();
+        Console.WriteLine("------------------------------------");
+        Console.WriteLine("Histórico de perações realizadas");
+        Console.WriteLine("------------------------------------\n");
+
+        for (int i = 0; i < Calculadora.History.Length; i++)
+        {
+            if (Calculadora.History[0] == null)
+            {
+                Console.WriteLine("Não foi realizado nenhuma operação.");
+                break;
+            }
+            if (Calculadora.History[i] != null)
+            {
+                Console.WriteLine(Calculadora.History[i]);
+                continue;
+            }
+            else if (Calculadora.History[i] == null)
+            {
+                break;
+            }
+
+        }
+
+        Console.Write("\nPressione <Enter> para voltar ao menu!");
+        Console.ReadKey();
     }
 }
