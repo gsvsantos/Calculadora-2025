@@ -1,8 +1,6 @@
 namespace Calculadora.ConsoleApp;
 internal class Program
 {
-    static int operationsQuantity = 0;
-    static string[] history = new string[200];
     static void Main(string[] args)
     {
         bool isGoing = true;
@@ -23,7 +21,7 @@ internal class Program
                 ShowErrorMessage();
 
             else
-                ShowResult(DoCalculation(option),ref isGoing);
+                ShowResult(DoCalculation(option), ref isGoing);
         } while (isGoing);
     }
     static string ShowMenu()
@@ -82,25 +80,24 @@ internal class Program
         Console.Write("Digite o segundo número: ");
         string secondNumberString = Console.ReadLine()!;
         decimal secondNumber = Convert.ToDecimal(secondNumberString);
-
         decimal result = 0;
-        string sinal = "";
+        string signal = "";
 
         if (option == "1")
         {
-            sinal = "+";
+            signal = "+";
             result = Calculadora.Addition(firstNumber, secondNumber);
         }
 
         else if (option == "2")
         {
-            sinal = "-";
+            signal = "-";
             result = Calculadora.Subtraction(firstNumber, secondNumber);
         }
 
         else if (option == "3")
         {
-            sinal = "*";
+            signal = "*";
             result = Calculadora.Multiplication(firstNumber, secondNumber);
         }
 
@@ -113,17 +110,15 @@ internal class Program
                 Console.Write("Digite o segundo número novamente: ");
                 secondNumber = Convert.ToDecimal(Console.ReadLine());
             }
-
-            sinal = "/";
+            signal = "/";
             result = Calculadora.Division(firstNumber, secondNumber);
         }
 
-        history[operationsQuantity] = $"{firstNumber} {sinal} {secondNumber} = {Math.Round(result, 2)}";
-        operationsQuantity++;
-
+        Calculadora.GetHistory(firstNumber, secondNumber, signal, result);
+        Calculadora.OperationsQuantity++;
         return result;
     }
-    static void ShowResult(decimal result,ref bool isGoing)
+    static void ShowResult(decimal result, ref bool isGoing)
     {
         Console.WriteLine("\n----------------------------------");
         Console.WriteLine("Resultado: " + result.ToString("F2"));
@@ -147,19 +142,11 @@ internal class Program
         Console.WriteLine("------------------");
         Console.WriteLine("Tabuada até 10");
         Console.WriteLine("------------------\n");
-
-        // usuário digita um número
         Console.Write("Digite um número para gerar a tabuada: ");
         int number = Convert.ToInt32(Console.ReadLine());
+
         Console.WriteLine($"\nTabuada de {number} até 10:");
-
-        // calcula a tabuada até o 10 desse numero // para
-
-        for (int i = 1; i <= 10; i++)
-        {
-            int r = number * i;
-            Console.WriteLine($"{number} x {i} = {r}");
-        }
+        Calculadora.MultiplicationTable(number);
 
         Console.Write("\nPressione <Enter> para voltar ao menu!");
         Console.ReadKey();
@@ -171,19 +158,19 @@ internal class Program
         Console.WriteLine("Histórico de perações realizadas");
         Console.WriteLine("------------------------------------\n");
 
-        for (int i = 0; i < history.Length; i++)
+        for (int i = 0; i < Calculadora.History.Length; i++)
         {
-            if (history[0] == null)
+            if (Calculadora.History[0] == null)
             {
                 Console.WriteLine("Não foi realizado nenhuma operação.");
                 break;
             }
-            if (history[i] != null)
+            if (Calculadora.History[i] != null)
             {
-                Console.WriteLine(history[i]);
+                Console.WriteLine(Calculadora.History[i]);
                 continue;
             }
-            else if (history[i] == null)
+            else if (Calculadora.History[i] == null)
             {
                 break;
             }
