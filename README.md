@@ -20,6 +20,9 @@ Uma simples calculadora de console capaz de realizar as quatro operações matem
 ## Requisitos
 - .NET SDK (recomendado .NET 8.0 ou superior) para compilação e execução do projeto.
 
+## Tecnologias
+[![Tecnologias](https://skillicons.dev/icons?i=git,github,cs,dotnet,visualstudio)](https://skillicons.dev)
+
 ## Como utilizar
 1. **Clone o Repositório**
 ```
